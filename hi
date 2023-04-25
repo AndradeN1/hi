@@ -1,0 +1,64 @@
+#Nick Andrade
+#4/15/21
+#Binary and Sequential searches
+
+import random
+
+# functions of both searches
+def binary_recur(list, start, end, target): #binary function
+    if end >= start :
+      mid = (end + start) // 2
+
+      if list[mid] == target:
+        return mid
+        
+
+      elif list[mid] > target:
+        return binary_recur(list, start, mid -1, target)
+
+      else:
+        return binary_recur(list, mid + 1, end, target)
+      
+
+    else:
+      return -1
+
+def seqSearch(list, target): #sequential search function
+  pos = 0
+  found = False
+  while pos < len(list) and not found:
+    if list[pos] == target:
+      found = True
+      return pos
+    else:
+      pos = pos + 1
+  return found
+
+#Generating a new random numbers list
+new = random.sample(range(0, 30), 10)
+new.sort()
+
+#Menu choices
+target = int(input("Enter the target number \n--> "))
+choice = int(input("Enter 1 to perform a Binary search \nEnter 2 to perfom a Sequential search. \n--> "))
+
+
+#Performs Binary recursive search
+if choice == 1:
+  result = binary_recur(new, 0, len(new)-1, target)
+  if result != -1:
+    print("Element is present at index ", str(result))
+  else:
+    print("Element not in list")
+
+#Performs sequential search
+elif choice == 2: 
+  ans = seqSearch(new, target)
+  if ans != False:
+    print("Element found at index ", str(ans))
+  else:
+    print("Element not in list")
+  
+
+#Prints list 
+print(new)
